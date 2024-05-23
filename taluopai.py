@@ -9,7 +9,7 @@ URL = "https://api.yuanfenju.com/index.php/v1/Zhanbu/taluozhanbu"   #https://por
 
 @plugins.register(name="taluopai",
                   desc="获取今日运势",
-                  version="1.0",
+                  version="1.1",
                   author="Haru",
                   desire_priority=100)
 
