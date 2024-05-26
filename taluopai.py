@@ -5,11 +5,11 @@ from bridge.context import ContextType
 from bridge.reply import Reply, ReplyType
 from common.log import logger
 
-URL = "https://api.yuanfenju.com/index.php/v1/Zhanbu/taluozhanbu"   #https://portal.yuanfenju.com/
+BASE_URL_DM = "https://api.yuanfenju.com/index.php/v1/Zhanbu/taluozhanbu"   #https://portal.yuanfenju.com/
 
 @plugins.register(name="taluopai",
                   desc="获取今日运势",
-                  version="1.1",
+                  version="1.0",
                   author="Haru",
                   desire_priority=100)
 
@@ -49,8 +49,8 @@ class taluopai(Plugin):
 
 
     def taluopai(self):
-        url = URL
-        params = "api_key=换成你自己的api"
+        url = BASE_URL_DM
+        params = "api_key=SDPbVwCDfTlb2irTBvfRgTK3B"
         headers = {'Content-Type': "application/x-www-form-urlencoded"}
         try:
             # 主接口
@@ -62,16 +62,16 @@ class taluopai(Plugin):
                     logger.info(f"主接口获取成功：{data}")
                     text = ("塔罗牌抽签成功：\n" "------------------------\n\n"
                     f"🍀您抽出第 {data['data']['id']} 号牌:  {data['data']['牌名']}  \n"                    
-                    f"🍀【关 键 字】:  {data['data']['id']};                     
-                    f"🍀【正    逆】:  {data['data']['正逆']}\n"
+                    f"🍀关键字:  {data['data']['关键字']}\n"                    
+                    f"🍀【正逆】:  {data['data']['正逆']}\n"
                     f"📜【牌面描述】:  {data['data']['牌面描述']}  \n"
                     f"📜【卡牌形象】:  {data['data']['image']}\n\n"                    
-                    f"💡【含    义】:  {data['data']['含义']['基本含义']}\n"
+                    f"💡【含义】:  {data['data']['含义']['基本含义']}\n"
                     f"💡【恋爱婚姻】:  {data['data']['含义']['恋爱婚姻']}\n\n"
                     f"💡【工作学业】:  {data['data']['含义']['工作学业']}\n"
                     f"💡【人际财富】:  {data['data']['含义']['人际财富']}\n"
                     f"💡【健康生活】:  {data['data']['含义']['健康生活']}\n"                                 
-                    f"💡【其    它】:  {data['data']['含义']['其它']}\n"
+                    f"💡【其它】:  {data['data']['含义']['其它']}\n")
                     return text
                 else:
                     logger.error(f"主接口返回值异常:{json_data}")
@@ -82,5 +82,5 @@ class taluopai(Plugin):
         except Exception as e:
             logger.error(f"接口异常：{e}")
                 
-        logger.error("接口挂了,无法获取")
+        logger.error("所有接口都挂了,无法获取")
         return None
